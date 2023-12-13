@@ -36,7 +36,7 @@ class AuthController extends Controller
 
         $user = User::where('nim', $request->nim)->first();
 
-        if (!$user && !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Credential does not match'], 400);
         }
 
