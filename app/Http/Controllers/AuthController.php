@@ -17,7 +17,10 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::create([
+        $user = User::where('nim', $request->nim)->first();
+        if($user) return response()->json(['message' => 'nim sudah terdaftar'], 409);
+
+        User::create([
             'nim' => $request->nim,
             'name' => $request->name,
             'password' => Hash::make($request->password)
