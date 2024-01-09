@@ -12,6 +12,7 @@ Route::middleware('auth:sanctum')->group(function () {
     
     
     Route::get('/user/posts', [PostController::class, 'getMyPosts']);
+    Route::get('/validate-token', [AuthController::class, 'validateToken']);
 });
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);

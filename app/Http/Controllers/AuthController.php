@@ -60,4 +60,11 @@ class AuthController extends Controller
             "message" => "Logout Berhasil",
         ],200);
     }
+
+    public function validateToken(): JsonResponse
+    {
+        return response()->json([
+            "message" => "Token Valid",
+        ],200);
+    }
 }

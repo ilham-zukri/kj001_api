@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostsResource;
 
 class PostController extends Controller
 {
@@ -27,14 +28,13 @@ class PostController extends Controller
 
     public function getMyPosts() {
         $user = User::find(auth()->user()->id);
-        $posts = $user->posts;
+        $posts = $user->posts()->paginate(10);
 
-        return response()->json($posts, 200);
+        return PostsResource::collection($posts);
     }
 
     public function getPosts(){
         $posts = Post::paginate(10);
-
-        return response()->json($posts, 200);
+        return PostsResource::collection($posts);
     }
 }
